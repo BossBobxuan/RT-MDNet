@@ -17,13 +17,22 @@ If you're using this code in a publication, please cite our paper.
 	year = {2018}
 	}
   
+### Notice
+We re-write the implementation of the roi_align to support the high version pytorch and now this code supports pytorch 1.0+.
+
+### How to use
+You need to complie the roi_align first.
+**Demo**
+    0. go to the dir of the roi_align
+    0. run python setup.py build_ext --inplace
+
 
 ### System Requirements
 
 This code is tested on 64 bit Linux (Ubuntu 16.04 LTS).
 
 **Prerequisites** 
-  0. PyTorch (>= 0.2.1)
+  0. PyTorch (>= 0.4.0)
   0. For GPU support, a GPU (~2GB memory for test) and CUDA toolkit.
   0. Training Dataset (ImageNet-Vid) if needed.
   

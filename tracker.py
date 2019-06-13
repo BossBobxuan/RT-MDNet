@@ -17,7 +17,7 @@ from model import *
 from bbreg import *
 from options import *
 from img_cropper import *
-from roi_align.modules.roi_align import RoIAlignAvg,RoIAlignMax,RoIAlignAdaMax,RoIAlignDenseAdaMax
+from roi_align import RoIAlignAvg,RoIAlignMax,RoIAlignAdaMax
 
 #np.random.seed(123)
 #torch.manual_seed(456)

@@ -22,9 +22,10 @@ We re-write the implementation of the roi_align to support the high version pyto
 
 ### How to use
 You need to complie the roi_align first.
+
 **Demo**
-    0. go to the dir of the roi_align
-    0. run python setup.py build_ext --inplace
+    1. go to the dir of the roi_align
+    2. run python setup.py build_ext --inplace
 
 
 ### System Requirements

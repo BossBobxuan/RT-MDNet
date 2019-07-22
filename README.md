@@ -24,8 +24,8 @@ We re-write the implementation of the roi_align to support the high version pyto
 You need to complie the roi_align first.
 
 **Demo**
-    1. go to the dir of the roi_align
-    2. run python setup.py build_ext --inplace
+1. go to the dir of the roi_align
+2. run python setup.py build_ext --inplace
 
 
 ### System Requirements
@@ -33,9 +33,10 @@ You need to complie the roi_align first.
 This code is tested on 64 bit Linux (Ubuntu 16.04 LTS).
 
 **Prerequisites** 
-  0. PyTorch (>= 0.4.0)
-  0. For GPU support, a GPU (~2GB memory for test) and CUDA toolkit.
-  0. Training Dataset (ImageNet-Vid) if needed.
+* Python3
+* PyTorch (>= 0.4.0)
+* For GPU support, a GPU (~2GB memory for test) and CUDA toolkit.
+* Training Dataset (ImageNet-Vid) if needed.
   
 ### Online Tracking
 
@@ -49,9 +50,9 @@ Also, results from pretrained model are provided in [here](https://www.dropbox.c
 
 ### Learning RT-MDNet
 **Preparing Datasets**
-  0. If you download ImageNet-Vid dataset, you run 'modules/prepro_data_imagenet.py' to parse meta-data from dataset. After that, 'imagenet_refine.pkl' is generized.
-  0. type the path of 'imagenet_refine.pkl' in 'train_mrcnn.py'
+1. If you download ImageNet-Vid dataset, you run 'modules/prepro_data_imagenet.py' to parse meta-data from dataset. After that, 'imagenet_refine.pkl' is generized.
+2. type the path of 'imagenet_refine.pkl' in 'train_mrcnn.py'
   
 **Demo**
-  0. Run 'train_mrcnn.py' after hyper-parameter tuning suitable to the capacity of your system.
+* Run 'train_mrcnn.py' after hyper-parameter tuning suitable to the capacity of your system.
   

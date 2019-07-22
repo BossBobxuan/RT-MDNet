@@ -133,7 +133,7 @@ def train_mdnet():
     best_score = 0.
     batch_cur_idx = 0
     for i in range(pretrain_opts['n_cycles']):
-        print "==== Start Cycle %d ====" % (i)
+        print("==== Start Cycle %d ====" % (i))
         k_list = np.random.permutation(K)
         prec = np.zeros(K)
         totalTripleLoss = np.zeros(K)
@@ -217,21 +217,21 @@ def train_mdnet():
             ## computation latency
             toc = time.time() - tic
 
-            print "Cycle %2d, K %2d (%2d), BinLoss %.3f, Prec %.3f, interLoss %.3f, Time %.3f" % \
-                      (i, j, k, cls_loss.data[0], prec[k], totalInterClassLoss[k], toc)
+            print("Cycle %2d, K %2d (%2d), BinLoss %.3f, Prec %.3f, interLoss %.3f, Time %.3f" % \
+                      (i, j, k, cls_loss.data[0], prec[k], totalInterClassLoss[k], toc))
 
         cur_score = prec.mean()
         try:
             total_miou = sum(total_iou)/len(total_iou)
         except:
             total_miou = 0.
-        print "Mean Precision: %.3f Triple Loss: %.3f Inter Loss: %.3f IoU: %.3f" % (prec.mean(), cur_triple_loss, totalInterClassLoss.mean(),total_miou)
+        print("Mean Precision: %.3f Triple Loss: %.3f Inter Loss: %.3f IoU: %.3f" % (prec.mean(), cur_triple_loss, totalInterClassLoss.mean(),total_miou))
         if cur_score > best_score:
             best_score = cur_score
             if pretrain_opts['use_gpu']:
                 model = model.cpu()
             states = {'shared_layers': model.layers.state_dict()}
-            print "Save model to %s" % pretrain_opts['model_path']
+            print("Save model to %s" % pretrain_opts['model_path'])
             torch.save(states, pretrain_opts['model_path'])
             if pretrain_opts['use_gpu']:
                 model = model.cuda()
@@ -278,6 +278,6 @@ if __name__ == "__main__":
     ######################Becuase of synchronization of options#######################
     ##################################################################################
 
-    print pretrain_opts
+    print(pretrain_opts)
     train_mdnet()
 

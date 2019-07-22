@@ -32,9 +32,9 @@ from roi_align import RoIAlignAvg,RoIAlignMax,RoIAlignAdaMax
 def set_optimizer(model, lr_base, lr_mult=opts['lr_mult'], momentum=opts['momentum'], w_decay=opts['w_decay']):
     params = model.get_learnable_params()
     param_list = []
-    for k, p in params.iteritems():
+    for k, p in params.items():
         lr = lr_base
-        for l, m in lr_mult.iteritems():
+        for l, m in lr_mult.items():
             if k.startswith(l):
                 lr = lr_base * m
         param_list.append({'params': [p], 'lr':lr})
@@ -105,7 +105,7 @@ def train(model, criterion, optimizer, pos_feats, neg_feats, maxiter, in_layer='
         optimizer.step()
 
         if opts['visual_log']:
-            print "Iter %d, Loss %.4f" % (iter, loss.data[0])
+            print("Iter %d, Loss %.4f" % (iter, loss.data[0]))
 
 
 
@@ -304,12 +304,12 @@ def run_mdnet(img_list, init_bbox, gt=None, seq='seq_name ex)Basketball', savefi
 
         cur_extra_cropped_image, _ = img_crop_model.crop_image(cur_image, np.reshape(extra_scene_box,(1,4)),extra_crop_img_size)
         cur_extra_cropped_image = cur_extra_cropped_image.detach()
-
-        cur_extra_pos_examples = gen_samples(SampleGenerator('gaussian', (ishape[1], ishape[0]), 0.1, 1.2),extra_target_bbox, opts['n_pos_init']/replicateNum, opts['overlap_pos_init'])
-        cur_extra_neg_examples = gen_samples(SampleGenerator('uniform', (ishape[1], ishape[0]), 0.3, 2, 1.1),extra_target_bbox, opts['n_neg_init']/replicateNum/4, opts['overlap_neg_init'])
+        # extra_target_bbox = np.array(list(map(int, extra_target_bbox)))
+        cur_extra_pos_examples = gen_samples(SampleGenerator('gaussian', (ishape[1], ishape[0]), 0.1, 1.2),extra_target_bbox, opts['n_pos_init']//replicateNum, opts['overlap_pos_init'])
+        cur_extra_neg_examples = gen_samples(SampleGenerator('uniform', (ishape[1], ishape[0]), 0.3, 2, 1.1),extra_target_bbox, opts['n_neg_init']/replicateNum//4, opts['overlap_neg_init'])
 
         ##bbreg sample
-        cur_extra_bbreg_examples = gen_samples(SampleGenerator('uniform', (ishape[1], ishape[0]), 0.3, 1.5, 1.1),extra_target_bbox, opts['n_bbreg']/replicateNum/4, opts['overlap_bbreg'], opts['scale_bbreg'])
+        cur_extra_bbreg_examples = gen_samples(SampleGenerator('uniform', (ishape[1], ishape[0]), 0.3, 1.5, 1.1),extra_target_bbox, opts['n_bbreg']/replicateNum//4, opts['overlap_bbreg'], opts['scale_bbreg'])
 
         batch_num = iidx*np.ones((cur_extra_pos_examples.shape[0], 1))
         cur_extra_pos_rois = np.copy(cur_extra_pos_examples)
@@ -419,7 +419,7 @@ def run_mdnet(img_list, init_bbox, gt=None, seq='seq_name ex)Basketball', savefi
         ax = plt.Axes(fig, [0., 0., 1., 1.])
         ax.set_axis_off()
         fig.add_axes(ax)
-        im = ax.imshow(cur_image, aspect='normal')
+        im = ax.imshow(cur_image)
 
         if gt is not None:
             gt_rect = plt.Rectangle(tuple(gt[0,:2]),gt[0,2],gt[0,3],
@@ -631,11 +631,11 @@ def run_mdnet(img_list, init_bbox, gt=None, seq='seq_name ex)Basketball', savefi
 
         if opts['visual_log']:
             if gt is None:
-                print "Frame %d/%d, Score %.3f, Time %.3f" % \
-                    (i, len(img_list), target_score, spf)
+                print("Frame %d/%d, Score %.3f, Time %.3f" % \
+                    (i, len(img_list), target_score, spf))
             else:
-                print "Frame %d/%d, Overlap %.3f, Score %.3f, Time %.3f" % \
-                    (i, len(img_list), overlap_ratio(gt[i],result_bb[i])[0], target_score, spf)
+                print("Frame %d/%d, Overlap %.3f, Score %.3f, Time %.3f" % \
+                    (i, len(img_list), overlap_ratio(gt[i],result_bb[i])[0], target_score, spf))
         iou_result[i]= overlap_ratio(gt[i],result_bb[i])[0]
 
 

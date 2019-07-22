@@ -15,11 +15,12 @@ def genConfig(seq_path, set_type):
     path, seqname = os.path.split(seq_path)
 
 
-    if set_type == 'OTB':
+    if set_type == 'OTB100':
         ############################################  have to refine #############################################
 
         img_list = sorted([seq_path + '/img/' + p for p in os.listdir(seq_path + '/img') if os.path.splitext(p)[1] == '.jpg'])
-
+        # if seqname == 'Jogging':
+        #     continue
         if (seqname == 'Jogging_1') or (seqname == 'Skating2_1'):
             gt = np.loadtxt(seq_path + '/groundtruth_rect.1.txt')
         elif (seqname == 'Jogging_2') or (seqname == 'Skating2_2'):
@@ -65,8 +66,8 @@ def genConfig(seq_path, set_type):
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("-set_type", default = 'OTB' )
-    parser.add_argument("-model_path", default = './models/rt-mdnet.pth')
+    parser.add_argument("-set_type", default = 'OTB100' )
+    parser.add_argument("-model_path", default = './rt-mdnet.pth')
     parser.add_argument("-result_path", default = './result.npy')
     parser.add_argument("-visual_log",default=False, action= 'store_true')
     parser.add_argument("-visualize",default=False, action='store_true')
@@ -93,11 +94,11 @@ if __name__ == "__main__":
     ############################Do not modify opts anymore.###########################
     ######################Becuase of synchronization of options#######################
     ##################################################################################
-    print opts
+    print(opts)
 
 
     ## path initialization
-    dataset_path = '/home/ilchae/dataset/tracking/'
+    dataset_path = '/home/ai-i-xuanshiyu/'
 
 
     seq_home = dataset_path + opts['set_type']
@@ -111,6 +112,8 @@ if __name__ == "__main__":
     iou_list_nobb=[]
     bb_result_nobb = dict()
     for num,seq in enumerate(seq_list):
+        if seq == "Jogging":
+            continue
         if num<-1:
             continue
         seq_path = seq_home + '/' + seq
@@ -131,7 +134,7 @@ if __name__ == "__main__":
         fps_list[seq]=fps
 
         bb_result_nobb[seq] = result_nobb
-        print '{} {} : {} , total mIoU:{}, fps:{}'.format(num,seq,iou_result.mean(), sum(iou_list)/len(iou_list),sum(fps_list.values())/len(fps_list))
+        print('{} {} : {} , total mIoU:{}, fps:{}'.format(num,seq,iou_result.mean(), sum(iou_list)/len(iou_list),sum(fps_list.values())/len(fps_list)))
 
     result['bb_result']=bb_result
     result['fps']=fps_list

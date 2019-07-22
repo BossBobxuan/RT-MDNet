@@ -33,6 +33,7 @@ You need to complie the roi_align first.
 This code is tested on 64 bit Linux (Ubuntu 16.04 LTS).
 
 **Prerequisites** 
+  0. Python3
   0. PyTorch (>= 0.4.0)
   0. For GPU support, a GPU (~2GB memory for test) and CUDA toolkit.
   0. Training Dataset (ImageNet-Vid) if needed.
